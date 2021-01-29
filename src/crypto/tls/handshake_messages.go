@@ -72,6 +72,7 @@ type clientHelloMsg struct {
 	random                           []byte
 	sessionId                        []byte
 	cipherSuites                     []uint16
+	extensions			 []uint16
 	compressionMethods               []uint8
 	serverName                       string
 	ocspStapling                     bool
@@ -384,7 +385,7 @@ func (m *clientHelloMsg) unmarshal(data []byte) bool {
 	if !s.ReadUint16LengthPrefixed(&extensions) || !s.Empty() {
 		return false
 	}
-
+	m.extensions = []uint16{}
 	for !extensions.Empty() {
 		var extension uint16
 		var extData cryptobyte.String
@@ -393,6 +394,7 @@ func (m *clientHelloMsg) unmarshal(data []byte) bool {
 			return false
 		}
 
+		m.extensions = append(m.extensions, extension)
 		switch extension {
 		case extensionServerName:
 			// RFC 6066, Section 3

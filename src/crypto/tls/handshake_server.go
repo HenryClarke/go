@@ -836,6 +836,7 @@ func clientHelloInfo(c *Conn, clientHello *clientHelloMsg) *ClientHelloInfo {
 
 	return &ClientHelloInfo{
 		CipherSuites:      clientHello.cipherSuites,
+		Extensions:        clientHello.extensions,
 		ServerName:        clientHello.serverName,
 		SupportedCurves:   clientHello.supportedCurves,
 		SupportedPoints:   clientHello.supportedPoints,

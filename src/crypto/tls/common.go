@@ -401,6 +401,9 @@ type ClientHelloInfo struct {
 	// TLS_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256).
 	CipherSuites []uint16
 
+	// Extensions lists the Extensions that were provided by the client
+	Extensions   []uint16
+
 	// ServerName indicates the name of the server requested by the client
 	// in order to support virtual hosting. ServerName is only set if the
 	// client is using SNI (see RFC 4366, Section 3.1).
